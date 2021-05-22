@@ -19,15 +19,12 @@
 import hashlib
 import os
 import math
-import binascii
 
 def random_numbers():
     random_base = int(math.pow(255, 3)) # As a rule though, you’ll have to make sure that 255^(x) is greater than 2^k
 
-    random_num_x = os.urandom(random_base)
-    random_num_y = os.urandom(random_base)
-    x = hashlib.sha256(random_num_x).hexdigest().encode('utf-8')
-    y = hashlib.sha256(random_num_y).hexdigest().encode('utf-8')
+    x = os.urandom(random_base)
+    y = os.urandom(random_base)
 
     return (x, y)
 
@@ -40,16 +37,18 @@ def hash_collision(k): # The largest instance the autograder will test on is k=2
         return( b'\x00',b'\x00' )
    
     #Collision finding code goes here
-    x, y = random_numbers()
-
     while True:
         x, y = random_numbers()
-        if (bin(int(x, base=16))[-k:] == bin(int(y, base=16))[-k:]):
+
+        hash_x = hashlib.sha256(x).hexdigest()
+        int_x = int(hash_x, base=16)
+        binary_x = str(bin(int_x))[2:]
+
+        hash_y = hashlib.sha256(y).hexdigest()
+        int_y = int(hash_y, base=16)
+        binary_y = str(bin(int_y))[2:]
+
+        if (hash_x[-k:] == hash_y[-k:]):
             break
     
-    print(x)
-    print(y)
-    
-    return(x, y)
-
-hash_collision(1)
+    return(str(x).encode('utf-8'), str(y).encode('utf-8'))
