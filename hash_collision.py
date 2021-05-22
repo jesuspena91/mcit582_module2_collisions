@@ -41,10 +41,10 @@ def hash_collision(k): # The largest instance the autograder will test on is k=2
    
     #Collision finding code goes here
     x, y = random_numbers()
-    
+
     while True:
         x, y = random_numbers()
-        if (x[-k:] == y[-k:]):
+        if (bin(int(x, base=16))[-k:] == bin(int(y, base=16))[-k:]):
             break
     
     print(x)
