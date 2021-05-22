@@ -28,7 +28,7 @@ def hash_collision(k): # The largest instance the autograder will test on is k=2
         print( "Specify a positive number of bits" )
         return( b'\x00',b'\x00' )
     
-    random_base = 1000 # As a rule though, you’ll have to make sure that 255^(x) is greater than 2^k 1048577
+    random_base = 64 # As a rule though, you’ll have to make sure that 255^(x) is greater than 2^k 1048577
     x = os.urandom(random_base)
     #Collision finding code goes here
     while True:
@@ -36,11 +36,11 @@ def hash_collision(k): # The largest instance the autograder will test on is k=2
 
         hash_x = hashlib.sha256(x).hexdigest()
         int_x = int(hash_x, base=16)
-        binary_x = str(bin(int_x))[2:]
+        binary_x = bin(int_x)[2:]
 
         hash_y = hashlib.sha256(y).hexdigest()
         int_y = int(hash_y, base=16)
-        binary_y = str(bin(int_y))[2:]
+        binary_y = bin(int_y)[2:]
 
         if (binary_x[-k:] == binary_y[-k:] and x != y):
             break
@@ -48,6 +48,6 @@ def hash_collision(k): # The largest instance the autograder will test on is k=2
     #print(binary_x)
     #print(binary_y)
 
-    return(str(x).encode('utf-8'), str(y).encode('utf-8'))
+    return(x, y)
 
 #hash_collision(10)
