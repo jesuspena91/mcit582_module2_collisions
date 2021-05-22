@@ -19,6 +19,7 @@
 import hashlib
 import os
 import math
+import binascii
 
 def random_numbers():
     random_base = int(math.pow(255, 3)) # As a rule though, you’ll have to make sure that 255^(x) is greater than 2^k
@@ -39,12 +40,16 @@ def hash_collision(k): # The largest instance the autograder will test on is k=2
         return( b'\x00',b'\x00' )
    
     #Collision finding code goes here
-
+    x, y = random_numbers()
+    
     while True:
         x, y = random_numbers()
         if (x[-k:] == y[-k:]):
             break
+    
     print(x)
     print(y)
     
     return(x, y)
+
+hash_collision(1)
