@@ -20,14 +20,6 @@ import hashlib
 import os
 import math
 
-def random_numbers():
-    random_base = int(math.pow(255, 3)) # As a rule though, you’ll have to make sure that 255^(x) is greater than 2^k
-
-    x = os.urandom(random_base)
-    y = os.urandom(random_base)
-
-    return (x, y)
-
 def hash_collision(k): # The largest instance the autograder will test on is k=20.
     if not isinstance(k,int):
         print( "hash_collision expects an integer" )
@@ -35,10 +27,12 @@ def hash_collision(k): # The largest instance the autograder will test on is k=2
     if k < 0:
         print( "Specify a positive number of bits" )
         return( b'\x00',b'\x00' )
-   
+    
+    random_base = int(math.pow(255, 3)) # As a rule though, you’ll have to make sure that 255^(x) is greater than 2^k
+    x = os.urandom(random_base)
     #Collision finding code goes here
     while True:
-        x, y = random_numbers()
+        y = os.urandom(random_base)
 
         hash_x = hashlib.sha256(x).hexdigest()
         int_x = int(hash_x, base=16)
