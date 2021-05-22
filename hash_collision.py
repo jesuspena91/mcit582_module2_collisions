@@ -50,12 +50,10 @@ def hash_collision(k): # The largest instance the autograder will test on is k=2
 
         if (binary_x[-k:] == binary_y[-k:] and x != y):
             break
-    
-    print(hash_x)
-    print(binary_x)
-    print(hash_y)
-    print(binary_y)
+
+    #print(binary_x)
+    #print(binary_y)
 
     return(str(x).encode('utf-8'), str(y).encode('utf-8'))
 
-#hash_collision(3)
+#hash_collision(10)
