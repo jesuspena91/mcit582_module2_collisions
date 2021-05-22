@@ -28,7 +28,7 @@ def hash_collision(k): # The largest instance the autograder will test on is k=2
         print( "Specify a positive number of bits" )
         return( b'\x00',b'\x00' )
     
-    random_base = int(math.pow(255, 3)) # As a rule though, you’ll have to make sure that 255^(x) is greater than 2^k
+    random_base = 1048577 # As a rule though, you’ll have to make sure that 255^(x) is greater than 2^k
     x = os.urandom(random_base)
     #Collision finding code goes here
     while True:
@@ -50,4 +50,4 @@ def hash_collision(k): # The largest instance the autograder will test on is k=2
 
     return(str(x).encode('utf-8'), str(y).encode('utf-8'))
 
-#hash_collision(10)
+#hash_collision(20)
